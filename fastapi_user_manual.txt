@@ -1,0 +1,35 @@
+!installation and setup
+your python version should be 3.6 or greater
+now download fastapi using terminal 
+pip install fastapi
+one can use fastapi globally or any virtual environment
+to create a vitual environment use, python3 -m venv environment_name (-m stands for mode)
+now to activate the environment that we have created earlier use, source environment_name/bin/activate (in linux and macOS)
+now install fastapi in the current created environment with, pip install fastapi
+now install uvicorn within the environment with, pip3 install uvicorn
+try to check the version of the uvicorn with, uvicorn --version, remember that you have installed the uvicorn in your virtual environment only so it won't get installed in globally or outside of that environment. to verify above statement open terminal in any other location and type, uvicorn --version, you will get command not found message
+
+
+open vscode in the virtual environment location (or just type 'code .' in the terminal)
+now create main.py file in the current directory (in terminal touch 'main.py'(to open terminal in vscode type 'ctrl+`'))
+in that file (main.py) type,
+
+from fastapi import FastAPI
+app = FastAPI() #creating an object (instance) 
+def index():
+	return 'heyy'
+
+now to run the server in fastapi use, unicorn main:app --reload in vscodes' terminal(to open terminal in vscode type 'ctrl+`')
+now we will get the localhost link in the terminal then we open that link in the browser
+at this point the browser says {'detail':'not found'} error(in terminal you get 404 not found error)
+that means we have missed the path so to resolve this error we make changes to our code like below 
+
+from fastapi import FastAPI
+app = FastAPI() #creating an object (instance) 
+@app.get('/')#means open this in the base url of localhost
+def index():
+	return 'heyy'
+	
+now we will need to rerun the server and reload the localhost tab in the browser(to stop the server use 'ctrl+c' in the terminal)
+now we get 'heyy' in the localhost page
+
