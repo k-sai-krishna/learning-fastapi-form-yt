@@ -42,3 +42,79 @@ app = FastAPI() #creating an object (instance)
 def index():
 	return {'student':{'name':'kotha sai krishna'}}
 
+now open a webpage that is located in the localhost:8000/about/ with following code
+
+from fastapi import FastAPI
+app = FastAPI()
+@app.get('/about')
+def about():#may have any name not exactly 'above'
+	return {'student':{'name':'kotha sai krishna'}}
+	
+break it down 
+file_name : main.py
+code:
+from fastapi import FastAPI
+app = FastAPI() #creating an object (instance) 
+@app.get('/')#means open this in the base url of localhost
+def index():
+	return {'student':{'name':'kotha sai krishna'}}
+	
+to run the server with above code use, uvicorn main:app 
+or to reload the server while working within the project use, uvicorn main:app --reload
+syntax to run the server: uvicorn file_name:object_name --reload
+
+@app is called as path operation decorator
+get() is an operation 
+string between the paranthesis of get method is called as path or route(in another frameworks)
+the function below the pathe operator decoratored function is known as path operation function
+
+
+path parameters
+#to make a page somewhat dynamic we use this type of code
+
+usage 1:
+from fastapi import FastAPI
+app = FastAPI()
+@app.get('/{id}')#take input from the user from the browsers' url
+def index(id):
+	return id
+
+in browsers' url type localhost:8000/777
+output: "777"
+
+usage 2:
+from fastapi import FastAPI
+app = FastAPI()
+@app.get('/{i}/home')
+def index(k):
+	return {'data':k}
+
+in browsers' url type localhost:8000/krishna
+output: {'data':'krishna'}
+making type constraint to the parameters
+
+from fastapi import FastAPI
+app = FastAPI()
+@app.get('/{bar}')
+def index(bar: int):
+	return {'data':{'bar':bar}}
+	
+in browsers' url type localhost:8000/343
+output: {'data':{'bar':343}}
+
+if you type other type of data it will through an error that can be understood easily i.e., 
+i enter in the usl like this localhost:8000/32s
+{
+  "detail": [
+    {
+      "type": "int_parsing",
+      "loc": [
+        "path",
+        "i"
+      ],
+      "msg": "Input should be a valid integer, unable to parse string as an integer",
+      "input": "32s"
+    }
+  ]
+}
+
